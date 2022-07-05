@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ name }}'s Watchlist</title>
+</head>
+<body>
+    <h2>{{ name }}'s Watchlist</h2>
+    <p>{{ movies|length }} movies in watchlist</p> {# 使用lenth过滤器获取movies的长度 #}
+    <ul>
+        {% for movie in movies %} {# 迭代movies变量 #}
+        <li>{{ movie.title }}</li>
+        {% endfor %} {# 结束for循环语句 #}
+    </ul>
+    <footer>
+        <small>@2022 {{ name  }}</small>
+    </footer>
+</body>
+</html>
