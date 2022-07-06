@@ -3,17 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ name }}'s Watchlist</title>
+    <link rel="icon" href="{{ url_for('static', filename='微信头像.ico') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css"/>
 </head>
 <body>
-    <h2>{{ name }}'s Watchlist</h2>
+    <h2><img alt='image1' class='image1' src="{{ url_for('static', filename='images/微信图片_20220706112808.gif') }}"
+             width="64" height="64"/>{{ name }}'s Watchlist</h2>
     <p>{{ movies|length }} movies in watchlist</p> {# 使用lenth过滤器获取movies的长度 #}
-    <ul>
+    <ul class="movie-list">
         {% for movie in movies %} {# 迭代movies变量 #}
         <li>{{ movie.title }}</li>
         {% endfor %} {# 结束for循环语句 #}
     </ul>
+    <img alt="foot_image" class='foot_image' src="{{ url_for('static', filename='images/微信图片_20220706112817.gif') }}"/>
     <footer>
-        <small>@2022 {{ name  }}</small>
+        <small>@2022 zzy</small>
     </footer>
 </body>
 </html>
