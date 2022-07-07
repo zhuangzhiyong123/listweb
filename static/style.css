@@ -8,6 +8,10 @@ body{
 /* 标题居中 */
 h2{text-align:center;}
 
+.movies-len{
+margin-left: 515px;
+margin-right: 515px;
+}
 /* 页脚 */
 footer{
     color: #888;
@@ -30,17 +34,21 @@ footer{
     }
 
 .movie-list li {
+margin-left: 500px;
+margin-right: 500px;
 padding: 12px 24px;
-border-bottom: 1px solid #ddd;
+border-style:solid;
+border-bottom:none;
+background-color: #cce8cf;
     }
 
-.movie-list li:last-child {
-border-bottom:none;
-}
+
 .movie-list li:hover {
 background-color: #f8f9fa;
 }
-
+.movie-list li:last-child {
+border-bottom:solid;
+}
 
 /* 页尾图像 */
 .foot_image {

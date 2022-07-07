@@ -9,7 +9,7 @@
 <body>
     <h2><img alt='image1' class='image1' src="{{ url_for('static', filename='images/微信图片_20220706112808.gif') }}"
              width="64" height="64"/>{{ name }}'s Watchlist</h2>
-    <p>{{ movies|length }} movies in watchlist</p> {# 使用lenth过滤器获取movies的长度 #}
+    <p class="movies-len">{{ movies|length }} movies in the watchlist</p> {# 使用lenth过滤器获取movies的长度 #}
     <ul class="movie-list">
         {% for movie in movies %} {# 迭代movies变量 #}
         <li>{{ movie.title }}</li>
