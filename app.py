@@ -19,7 +19,7 @@ db = SQLAlchemy(app)  # 初始化扩展，传入程序实例app
 
 class User(db.Model):  # 表名将会是 user（自动生成，小写处理）
     id = db.Column(db.Integer, primary_key=True)  # 主键
-    name = db.Column(db.String(20))  # 名字
+    name = db.Column(db.String(20))  # 名字u
 
 
 class Movie(db.Model):  # 表名将会是 movie
