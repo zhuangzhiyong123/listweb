@@ -27,11 +27,22 @@ class Movie(db.Model):  # 表名将会是 movie
     title = db.Column(db.String(60))  # 电影标题
 
 
+# 将user变量统一注入到每一个模板的上下文环境中
+@app.context_processor
+def inject_user():
+    user = User.query.first()
+    return dict(user=user)  # 需要返回字典，等同于return {'user': user}
+
+
 @app.route('/')
 def index():
-    user = User.query.first()
     movies = Movie.query.all()
-    return render_template('index.html', user=user, movies=movies)
+    return render_template('index.html', movies=movies)
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
 
 
 # 自定义命令 initdb
