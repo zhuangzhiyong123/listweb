@@ -1,5 +1,5 @@
-* .db
-* .env
+*.db
+/.env
 *.pyc
 *~
 __pycache__
