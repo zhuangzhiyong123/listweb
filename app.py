@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import request, url_for, redirect, flash, Flask, render_template
 from flask_sqlalchemy import SQLAlchemy  # 导入扩展类
 
 # 设置数据库 URI
@@ -34,16 +34,65 @@ def inject_user():
     return dict(user=user)  # 需要返回字典，等同于return {'user': user}
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
+    if request.method == 'POST':  # 判断是否是 POST 请求
+        # 获取表单数据
+        title = request.form.get('title')  # 传入表单对应输入字段的name值
+        if (not title) or (len(title) > 60):
+            flash('Invalid input.')  # 显示错误提示
+            return redirect(url_for('index'))  # 重定向回主页
+        # 保存表单数据到数据库
+        movie = Movie(title=title)
+        db.session.add(movie)
+        db.session.commit()
+        flash('Item created.')  # 显示成功创建的提示
+        return redirect(url_for('index'))  # 重定向回主页
     movies = Movie.query.all()
     return render_template('index.html', movies=movies)
+
+
+@app.route('/movie/edit/<int:movie_id>', methods=['GET', 'POST'])
+def edit(movie_id):
+    movie = Movie.query.get_or_404(movie_id)
+    if request.method == 'POST': # 处理编辑表单的提交请求
+        title = request.form['title']
+        if not title or len(title) > 60:
+            flash('Invalid input.')
+            return redirect(url_for('edit', movie_id=movie_id))
+        # 重定向回对应的编辑页面
+        movie.title = title # 更新标题
+        db.session.commit() # 提交数据库会话
+        flash('Item updated.')
+        return redirect(url_for('index')) # 重定向回主页
+    return render_template('edit.html', movie=movie) # 传入被编辑的电影记录
+
+
+@app.route('/movie/delete/<int:movie_id>', methods=['POST']) #限定只接受 POST 请求
+def delete(movie_id):
+    movie = Movie.query.get_or_404(movie_id) # 获取电影记录
+    db.session.delete(movie) # 删除对应的记录
+    db.session.commit() # 提交数据库会话
+    flash('Item deleted.')
+    return redirect(url_for('index')) # 重定向回主页
 
 
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
 
+
+@app.errorhandler(400)
+def bad_request(e):
+    return render_template('400.html'), 400
+
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_template('500.html'), 500
+
+
+app.config['SECRET_KEY'] = 'dev'
 
 # 自定义命令 initdb
 import click
