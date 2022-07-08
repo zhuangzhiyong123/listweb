@@ -1,13 +1,14 @@
 {% extends 'base.html' %}  # 声明扩展自模板 base.html
 
 {% block content %}
-    <p class="movies-len">{{ movies|length }} movies in the watchlist</p> {# 使用lenth过滤器获取movies的长度 #}
+
     <ul class="movie-list">
+        <li class="movies-len">{{ movies|length }} movies in the watchlist</li> {# 使用lenth过滤器获取movies的长度 #}
         {% for movie in movies %} {# 迭代movies变量 #}
         <li>{{ movie.title }}
         <span class="float-right">
-        <a class="imdb" href="https://www.imdb.com/find?q={{
-        movie.title }}" target="_blank" title="Find this movie on IMDb">IMDb</a>
+        <a class="imdb" href="https://www.douban.com/search?q={{
+        movie.title }}" target="_blank" title="Find this movie on douban">豆瓣</a>
         </span>
         </li>
         {% endfor %} {# 结束for循环语句 #}

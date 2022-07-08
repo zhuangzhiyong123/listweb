@@ -13,6 +13,8 @@ nav ul {
 list-style-type: none;
 margin: 0;
 padding: 0;
+margin-left: 500px;
+margin-right: 500px;
 overflow: hidden;
 background-color: #333;
 }
@@ -30,10 +32,7 @@ nav li a:hover {
 background-color: #111;
 }
 
-.movies-len{
-margin-left: 515px;
-margin-right: 515px;
-}
+
 /* 页脚 */
 footer{
     color: #888;
@@ -64,7 +63,9 @@ border-bottom:none;
 background-color: #cce8cf;
     }
 
-
+.movie-list li:first-child {
+background-color: #f8f9fa;
+}
 .movie-list li:hover {
 background-color: #f8f9fa;
 }
