@@ -4,7 +4,7 @@
     {% block head %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ user.name }}'s Watchlist</title>
+    <title>{{ user.username }}'s Watchlist</title>
     <link rel="icon" href="{{ url_for('static', filename='微信头像.ico') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css"/>
     {% endblock %}
@@ -16,7 +16,7 @@
     {% endfor %}
     <h2>
         <img alt='image1' class='image1' src="{{ url_for('static', filename='images/微信图片_20220706112808.gif') }}"
-             width="64" height="64"/>{{ user.name }}'s Watchlist
+             width="64" height="64"/>{{ user.username }}'s Watchlist
     </h2>
     <nav>
         <ul>
