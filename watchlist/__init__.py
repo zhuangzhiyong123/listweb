@@ -11,10 +11,11 @@ if WIN:  # 如果是 Windows 系统，使用三个斜线
 else:  # 否则使用四个斜线
     prefix = 'sqlite:////'
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'dev'  # 基于安全的考虑，在部署时应该设置为随机字符，且不应该明文写在代码里。
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev')  # 基于安全的考虑，在部署时应该设置为随机字符，且不应该明文写在代码里。
 # 注意更新这里的路径，把 app.root_path 添加到 os.path.dirname() 中
 # 以便把文件定位到项目根目录
-app.config['SQLALCHEMY_DATABASE_URI'] = prefix + os.path.join(os.path.dirname(app.root_path), 'data.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = prefix + os.path.join(os
+.path.dirname(app.root_path), os.getenv('DATABASE_FILE', 'data.db'))
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # 关闭对模型修改的监控
 
 # 设置数据库 URI
