@@ -165,7 +165,6 @@ class WatchlistTestCase(unittest.TestCase):
         self.assertNotIn('Item updated.', data)
         self.assertIn('Invalid input.', data)
 
-
     def test_delete_item(self):
         self.login()
 
@@ -186,11 +185,11 @@ class WatchlistTestCase(unittest.TestCase):
     def test_admin_command(self):
         db.drop_all()
         db.create_all()
-        result = self.runner.invoke(args=['admin', '--username', 'grey', '--password', '123'])
+        result = self.runner.invoke(args=['admin', '--username', 'zzy', '--password', '123'])
         self.assertIn('Creating user...', result.output)
         self.assertIn('Done.', result.output)
         self.assertEqual(User.query.count(), 1)
-        self.assertEqual(User.query.first().username, 'grey')
+        self.assertEqual(User.query.first().username, 'zzy')
         self.assertTrue(User.query.first().validate_password('123'))
 
     def test_admin_command_update(self):
