@@ -1,8 +1,15 @@
 {% extends 'base.html' %}
+{% block head_title %}
+    <h2>
+        <img alt='image1' class='image1' src="{{ url_for('static', filename='images/微信图片_20220706112808.gif') }}"
+             width="64" height="64"/>{{ user.username }}'s web
+    </h2>
+{% endblock %}
 {% block content %}
     <h3>Edit item</h3>
     <form method="post">
     Book Name <input type="text" name="title" autocomplete="off" value="{{ book.title }}">
     <input class="btn" type="submit" name="submit" value="Update">
     </form>
+    <img alt="foot_image" class='foot_image' src="{{ url_for('static', filename='images/微信图片_20220706112817.gif') }}"/>
 {% endblock %}
