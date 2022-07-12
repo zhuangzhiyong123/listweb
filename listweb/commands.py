@@ -1,7 +1,7 @@
 import click
 
 from watchlist import app, db
-from watchlist.models import User, Movie
+from watchlist.models import User, Movie, Book, Todo
 
 
 # 自定义命令 initdb，初始化数据库
@@ -36,12 +36,30 @@ def forge():
               {'title': '极速车王'},
               {'title': '阿凡达'},
               ]
+
+    books = [{'title': '优秀的绵羊'},
+             {'title': '当下的启蒙'},
+             {'title': '人类简史'},
+             ]
+
+    todos = [{'title': '学SQL', 'ddl': '暑假内'},
+             {'title': '学爬虫', 'ddl': '暑假内'},
+             ]
+
     user = User(name=user_name)
     db.session.add(user)
 
     for m in movies:
         movie = Movie(title=m['title'])
         db.session.add(movie)
+
+    for b in books:
+        book = Book(title=b['title'])
+        db.session.add(book)
+
+    for td in todos:
+        todo = Todo(title=td['title'],ddl=td['ddl'])
+        db.session.add(todo)
 
     db.session.commit()
     click.echo('Done.')

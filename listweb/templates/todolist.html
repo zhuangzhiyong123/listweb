@@ -1,0 +1,32 @@
+{% extends 'base.html' %}  # 声明扩展自模板 base.html
+{% block head_title %}
+    <h2>
+        <img alt='image1' class='image1' src="{{ url_for('static', filename='images/微信图片_20220706112808.gif') }}"
+             width="64" height="64"/>{{ user.username }}'s todolist
+    </h2>
+{% endblock %}
+{% block content %}
+        {% if current_user.is_authenticated %}
+        <form method="POST" class="add_form">
+            Todo Name <input type="text" name="title" autocomplete="off" >
+            DDL <input type="text" name="ddl" autocomplete="off" >
+            <input class="btn" type="submit" name="submit" value="Add">
+        </form>
+        {% endif %}
+    <ul class="list">
+        <li>{{ todos|length }} todos in the todolist</li> {# 使用lenth过滤器获取todos的长度 #}
+        {% for todo in todos %} {# 迭代todos变量 #}
+        <li>{{ todo.title }}　　{{ todo.ddl }}
+        <span class="float-right">
+            {% if current_user.is_authenticated %}
+            <a class="btn" href="{{ url_for('edit_todos', todo_id=todo.id) }}">Edit</a>
+            <form class="inline-form" method="post"	action="{{ url_for('delete_todo', todo_id=todo.id)	}}">
+                <input	class="btn"	type="submit" name="delete" value="Delete" onclick="return	confirm('Are you sure to delete this item?')">
+            </form>
+            {% endif %}
+        </span>
+        </li>
+        {% endfor %} {# 结束for循环语句 #}
+    </ul>
+    <img alt="foot_image" class='foot_image' src="{{ url_for('static', filename='images/微信图片_20220706112817.gif') }}"/>
+{% endblock %}

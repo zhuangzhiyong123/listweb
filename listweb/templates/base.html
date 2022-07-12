@@ -4,7 +4,7 @@
     {% block head %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ user.username }}'s Watchlist</title>
+    <title>{{ user.username }}'s list</title>
     <link rel="icon" href="{{ url_for('static', filename='微信头像.ico') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css"/>
     {% endblock %}
@@ -14,17 +14,19 @@
     {% for message in get_flashed_messages() %}
          <div class="alert">{{ message }}</div>
     {% endfor %}
-    <h2>
-        <img alt='image1' class='image1' src="{{ url_for('static', filename='images/微信图片_20220706112808.gif') }}"
-             width="64" height="64"/>{{ user.username }}'s Watchlist
-    </h2>
+    {% block head_title %}{% endblock %}
     <nav>
         <ul>
             <li><a href="{{ url_for('index') }}">Home</a></li>
             {% if current_user.is_authenticated %}
+            <li><a href="{{ url_for('watchlist') }}">Watchlist</a></li>
+            <li><a href="{{ url_for('readlist') }}">Readlist</a></li>
+            <li><a href="{{ url_for('todolist') }}">Tolist</a></li>
             <li><a href="{{ url_for('settings') }}">Settings</a></li>
             <li><a href="{{ url_for('logout') }}">Logout</a></li>
             {% else %}
+            <li><a href="{{ url_for('watchlist') }}">Watchlist</a></li>
+            <li><a href="{{ url_for('readlist') }}">Readlist</a></li>
             <li><a href="{{ url_for('login') }}">Login</a></li>
             {% endif %}
         </ul>

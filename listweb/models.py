@@ -20,3 +20,14 @@ class User(db.Model, UserMixin):  # 表名将会是 user（自动生成，小写
 class Movie(db.Model):  # 表名将会是 movie
     id = db.Column(db.Integer, primary_key=True)  # 主键
     title = db.Column(db.String(60))  # 电影标题
+
+
+class Book(db.Model):  # 表名将会是 book
+    id = db.Column(db.Integer, primary_key=True)  # 主键
+    title = db.Column(db.String(60))  # 书籍标题
+
+
+class Todo(db.Model):  # 表名将会是 todo
+    id = db.Column(db.Integer, primary_key=True)  # 主键
+    title = db.Column(db.String(60))  # todo标题
+    ddl = db.Column(db.String(60))  # todo's ddl

@@ -1,29 +1,33 @@
 {% extends 'base.html' %}  # 声明扩展自模板 base.html
-
+{% block head_title %}
+    <h2>
+        <img alt='image1' class='image1' src="{{ url_for('static', filename='images/微信图片_20220706112808.gif') }}"
+             width="64" height="64"/>{{ user.username }}'s watchlist
+    </h2>
+{% endblock %}
 {% block content %}
         {% if current_user.is_authenticated %}
-        <form method="POST" class="add_movie_form">
+        <form method="POST" class="add_form">
             Movie Name <input type="text" name="title" autocomplete="off" >
             <input class="btn" type="submit" name="submit" value="Add">
         </form>
         {% endif %}
-    <ul class="movie-list">
-
-        <li class="movies-len">{{ movies|length }} movies in the watchlist</li> {# 使用lenth过滤器获取movies的长度 #}
+    <ul class="list">
+        <li>{{ movies|length }} movies in the watchlist</li> {# 使用lenth过滤器获取movies的长度 #}
         {% for movie in movies %} {# 迭代movies变量 #}
         <li>{{ movie.title }}
         <span class="float-right">
             {% if current_user.is_authenticated %}
-            <a class="btn" href="{{ url_for('edit', movie_id=movie.id) }}">Edit</a>
-            <form class="inline-form" method="post"	action="{{ url_for('delete', movie_id=movie.id)	}}">
+            <a class="btn" href="{{ url_for('edit_movies', movie_id=movie.id) }}">Edit</a>
+            <form class="inline-form" method="post"	action="{{ url_for('delete_movie', movie_id=movie.id)	}}">
                 <input	class="btn"	type="submit" name="delete" value="Delete" onclick="return	confirm('Are you sure to delete this item?')">
             </form>
             {% endif %}
-            <a class="movieweb" href="https://www.douban.com/search?q={{
+            <a class="weblink" href="https://www.douban.com/search?q={{
         movie.title }}" target="_blank" title="Find this movie on douban">豆瓣</a>
-            <a class="movieweb" href="https://www.maoyan.com/query?kw={{
+            <a class="weblink" href="https://www.maoyan.com/query?kw={{
         movie.title }}" target="_blank" title="Find this movie on maoyan">猫眼</a>
-            <a class="movieweb" href="http://film.mtime.com/search/?q={{
+            <a class="weblink" href="http://film.mtime.com/search/?q={{
         movie.title }}&suggestType=0" target="_blank" title="Find this movie on shiguangwang">时光网</a>
         </span>
         </li>

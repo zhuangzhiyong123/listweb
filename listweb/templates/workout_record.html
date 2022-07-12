@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+        <meta charset="UTF-8">
+        <title>日历</title>
+        <style>
+            table {
+				height: 230px;
+                width: 320px;
+                margin:60px auto;
+                text-align: center;
+                border: 1px solid rgba(97,150,245,1.00);
+                border-bottom: 3px double rgba(97,150,245,1.00);
+                box-shadow: 0 1px 2px darkcyan;
+            }
+            th,td {  border: 1px solid rgba(97,150,245,1.00);
+            }
+
+            .today {
+				color:#F00;
+            }
+        </style>
+        <script>
+            function isLeap(year) {
+                return year % 4 == 0 ? (year % 100 != 0 ? 1 : (year % 400 == 0 ? 1 : 0)) : 0;
+            }
+            var i, k,
+                today = new Date(),
+                y = today.getFullYear(),
+                m = today.getMonth(),
+                d = today.getDate(),
+                firstday = new Date(y, m, 1),
+                dayOfWeek = firstday.getDay(),
+                days_per_month = new Array(31, 28 + isLeap(y), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31),
+                str_nums = Math.ceil((dayOfWeek + days_per_month[m]) / 7);
+            document.write("<table cellspacing='0'><tr><td colspan ='7'>" + y + "年" + (m + 1) + "月" + "</td></tr>");
+            document.write("<tr><th>日</th><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th></tr>");
+            for(i = 0; i < str_nums; i += 1) {
+                document.write('<tr>');
+                for(k = 0; k < 7; k++) {
+                    var idx = 7 * i + k;
+                    var date = idx - dayOfWeek + 1;
+                    (date <= 0 || date > days_per_month[m]) ? date = ' ': date = idx - dayOfWeek + 1;
+                    date == d ? document.write('<td class="today">' + date + '</td>') : document.write('<td>' + date + '</td>');
+                }
+                document.write('</tr>');
+            }
+            document.write('</table>');
+        </script>
+    </head>
+
+    <body>
+    </body>
+</html>

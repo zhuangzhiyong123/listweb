@@ -1,0 +1,19 @@
+{% extends 'base.html' %}  # 声明扩展自模板 base.html
+{% block head_title %}
+    <h2>
+        <img alt='image1' class='image1' src="{{ url_for('static', filename='images/微信图片_20220706112808.gif') }}"
+             width="64" height="64"/>{{ user.username }}'s web
+    </h2>
+{% endblock %}
+{% block content %}
+<p>
+    这里是zzy做的第一个网站（也可能会是最后一个）。<br/>
+    集成了watchlist、readlist和todolist（登录后可见）。用于记录我近期内的观影、阅读清单和待办事项。<br/>
+    目前还没有做用户注册功能，所以只有我自己一个用户。以后也许会加上这个功能（也可能不会），让这个网站能供更多人使用。<br/>
+    登陆前后能看到的页面有些许区别。登陆后会显示todolist，且能对三个清单进行编辑。<br/>
+    登陆后的页面如下图：<br/>
+    <img alt="登陆后页面1" src="{{ url_for('static', filename='images/登陆后页面展示1.png') }}"/><br/>
+    <img alt="登陆后页面2" src="{{ url_for('static', filename='images/登陆后页面展示2.png') }}"/>
+</p>
+<img alt="foot_image" class='foot_image' src="{{ url_for('static', filename='images/微信图片_20220706112817.gif') }}"/>
+{% endblock %}

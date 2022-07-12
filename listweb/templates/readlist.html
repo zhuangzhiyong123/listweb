@@ -1,0 +1,33 @@
+{% extends 'base.html' %}  # 声明扩展自模板 base.html
+{% block head_title %}
+    <h2>
+        <img alt='image1' class='image1' src="{{ url_for('static', filename='images/微信图片_20220706112808.gif') }}"
+             width="64" height="64"/>{{ user.username }}'s readlist
+    </h2>
+{% endblock %}
+{% block content %}
+        {% if current_user.is_authenticated %}
+        <form method="POST" class="add_form">
+            Book Name <input type="text" name="title" autocomplete="off" >
+            <input class="btn" type="submit" name="submit" value="Add">
+        </form>
+        {% endif %}
+    <ul class="list">
+        <li>{{ books|length }} books in the readlist</li> {# 使用lenth过滤器获取books的长度 #}
+        {% for book in books %} {# 迭代books变量 #}
+        <li>{{ book.title }}
+        <span class="float-right">
+            {% if current_user.is_authenticated %}
+            <a class="btn" href="{{ url_for('edit_books', book_id=book.id) }}">Edit</a>
+            <form class="inline-form" method="post"	action="{{ url_for('delete_book', book_id=book.id)	}}">
+                <input	class="btn"	type="submit" name="delete" value="Delete" onclick="return	confirm('Are you sure to delete this item?')">
+            </form>
+            {% endif %}
+            <a class="weblink" href="https://www.douban.com/search?q={{
+        book.title }}" target="_blank" title="Find this book on douban">豆瓣</a>
+        </span>
+        </li>
+        {% endfor %} {# 结束for循环语句 #}
+    </ul>
+    <img alt="foot_image" class='foot_image' src="{{ url_for('static', filename='images/微信图片_20220706112817.gif') }}"/>
+{% endblock %}
