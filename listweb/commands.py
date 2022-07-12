@@ -1,7 +1,7 @@
 import click
 
-from watchlist import app, db
-from watchlist.models import User, Movie, Book, Todo
+from listweb import app, db
+from listweb.models import User, Movie, Book, Todo
 
 
 # 自定义命令 initdb，初始化数据库

@@ -26,7 +26,7 @@ login_manager = LoginManager(app)  # 实例化扩展类
 
 @login_manager.user_loader
 def load_user(user_id):  # 创建用户加载回调函数，接受用户 ID 作为参数
-    from watchlist.models import User
+    from listweb.models import User
     user = models.User.query.get(int(user_id))  # 用 ID 作为 User 模型的主键查询对应的用户
     return user  # 返回用户对象
 
@@ -40,9 +40,9 @@ login_manager.login_message = 'Sorry, please login first.'
 # 将user变量统一注入到每一个模板的上下文环境中
 @app.context_processor
 def inject_user():
-    from watchlist.models import User
+    from listweb.models import User
     user = User.query.first()
     return dict(user=user)  # 需要返回字典，等同于return {'user': user}
 
 
-from watchlist import commands, errors, views
+from listweb import commands, errors, views

@@ -1,8 +1,8 @@
 from flask import request, url_for, redirect, flash, render_template
 from flask_login import current_user, login_required, login_user, logout_user
 
-from watchlist import app, db
-from watchlist.models import User, Movie, Book, Todo
+from listweb import app, db
+from listweb.models import User, Movie, Book, Todo
 
 
 @app.route('/')
